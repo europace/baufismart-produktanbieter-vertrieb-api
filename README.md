@@ -11,8 +11,8 @@ Mit dieser API können ausgewählte Produktanbieter im Produktanbieter-Vertrieb 
 [![Pattern](https://img.shields.io/badge/Pattern-Tolerant%20Reader-yellowgreen)](https://martinfowler.com/bliki/TolerantReader.html)
 
 ## Dokumentation
-[![YAML](https://img.shields.io/badge/OAS-YAML-lightgrey)](https://github.com/europace/baufismart-produktanbieter-vertrieb-api/blob/master/produktanbieter-vertrieb-openapi.yaml)
-[![JSON](https://img.shields.io/badge/OAS-JSON-lightgrey)](https://github.com/europace/baufismart-produktanbieter-vertrieb-api/blob/master/produktanbieter-vertrieb-openapi.json)
+[![YAML](https://img.shields.io/badge/OAS-YAML-lightgrey)](https://github.com/europace/baufismart-produktanbieter-vertrieb-api/blob/main/produktanbieter-vertrieb-openapi.yaml)
+[![JSON](https://img.shields.io/badge/OAS-JSON-lightgrey)](https://github.com/europace/baufismart-produktanbieter-vertrieb-api/blob/main/produktanbieter-vertrieb-openapi.json)
 
 Feedback und Fragen zum Modell sind als [GitHub Issue](https://github.com/europace/baufismart-produktanbieter-vertrieb-api/issues/new) willkommen.
 
