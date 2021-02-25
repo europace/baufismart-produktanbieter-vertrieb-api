@@ -10,47 +10,47 @@ info:
     email: devsupport@europace2.de
   version: 1.1.2; 5ed069a8f4e6d299d36c7f4ee93c528ae2f7c07a
 servers:
-  - url: https://baufinanzierung.api.europace.de
-    description: Produktionsserver
+- url: https://baufinanzierung.api.europace.de
+  description: Produktionsserver
 tags:
-  - name: Produktanbietervertrieb
-    description: Produktanbietervertriebsangaben an einem existierenden Vorgang aktualisieren
+- name: Produktanbietervertrieb
+  description: Produktanbietervertriebsangaben an einem existierenden Vorgang aktualisieren
 paths:
   /produktanbieter-vertrieb/{vorgangsnummer}:
     post:
       tags:
-        - Produktanbietervertrieb
+      - Produktanbietervertrieb
       summary: Produktanbietervertriebsangaben an einem existierenden Vorgang aktualisieren
       description: Produktanbietervertriebsangaben werden in BaufiSmart an einem existierenden
         Vorgang aktualisiert. Der Scope `baufinanzierung:echtgeschaeft`wird benötigt,
         wenn der Datenkontext `ECHT_GESCHAEFT` gewählt wird.
       operationId: updateProduktanbieterVertriebsAngaben
       parameters:
-        - name: vorgangsnummer
-          in: path
-          description: Nummer des Vorgangs, dessen Daten aktualisiert werden
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: string
-          example: UT5MDV
-        - name: Authorization
-          in: header
-          description: Authorization Bearer Token
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: string
-        - name: TraceId
-          in: header
-          description: Eine eindeutige technische Id zur Identifikation des Requests
-          required: false
-          style: simple
-          explode: false
-          schema:
-            type: string
+      - name: vorgangsnummer
+        in: path
+        description: Nummer des Vorgangs, dessen Daten aktualisiert werden
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: UT5MDV
+      - name: Authorization
+        in: header
+        description: Authorization Bearer Token
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: TraceId
+        in: header
+        description: Eine eindeutige technische Id zur Identifikation des Requests
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
       requestBody:
         content:
           application/json; version=1.0:
@@ -84,9 +84,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestProblem'
       security:
-        - oAuth2:
-            - baufinanzierung:vorgang:schreiben
-            - baufinanzierung:echtgeschaeft
+      - oAuth2:
+        - baufinanzierung:vorgang:schreiben
+        - baufinanzierung:echtgeschaeft
 components:
   schemas:
     KonditionsAngaben:
@@ -105,8 +105,8 @@ components:
             type: string
             description: Für den Kunden anzuwendende Konditionsabschläge.
             enum:
-              - NEUKUNDE
-              - MITARBEITER
+            - NEUKUNDE
+            - MITARBEITER
       description: OLB-spezifische Konditionsangaben
     OlbScoring:
       type: object
@@ -116,22 +116,22 @@ components:
           description: OLB-Bonitätsklasse der Gesamtheit der Antragsteller eines Vorgangs
           example: KLASSE_8
           enum:
-            - KLASSE_1
-            - KLASSE_2
-            - KLASSE_3
-            - KLASSE_4
-            - KLASSE_5
-            - KLASSE_6
-            - KLASSE_7
-            - KLASSE_8
-            - KLASSE_9
-            - KLASSE_10
-            - KLASSE_11
-            - KLASSE_12
-            - KLASSE_13
-            - KLASSE_14
-            - KLASSE_15
-            - KLASSE_16
+          - KLASSE_1
+          - KLASSE_2
+          - KLASSE_3
+          - KLASSE_4
+          - KLASSE_5
+          - KLASSE_6
+          - KLASSE_7
+          - KLASSE_8
+          - KLASSE_9
+          - KLASSE_10
+          - KLASSE_11
+          - KLASSE_12
+          - KLASSE_13
+          - KLASSE_14
+          - KLASSE_15
+          - KLASSE_16
       description: OLB-spezifisches Scoring
     ScoringAngaben:
       type: object
@@ -141,7 +141,7 @@ components:
       description: Produktanbietervertriebsspezifische Scoringangaben zu einem Vorgang
     UpdateRequest:
       required:
-        - scoring
+      - scoring
       type: object
       properties:
         scoring:
@@ -150,9 +150,9 @@ components:
           $ref: '#/components/schemas/KonditionsAngaben'
     Problem:
       required:
-        - status
-        - title
-        - type
+      - status
+      - title
+      - type
       type: object
       properties:
         type:
@@ -184,14 +184,14 @@ components:
           example: /produktanbieter-vertrieb
     BadRequestProblem:
       allOf:
-        - $ref: '#/components/schemas/Problem'
-        - type: object
-          properties:
-            violations:
-              $ref: '#/components/schemas/BadRequestProblem_violations'
+      - $ref: '#/components/schemas/Problem'
+      - type: object
+        properties:
+          violations:
+            $ref: '#/components/schemas/BadRequestProblem_violations'
     BadRequestProblem_violations:
       required:
-        - field
+      - field
       type: object
       properties:
         field:
