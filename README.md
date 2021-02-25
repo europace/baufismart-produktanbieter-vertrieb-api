@@ -33,7 +33,7 @@ benutze [![Authentication](https://img.shields.io/badge/Auth-OAuth2-green)](http
 
 | Scope                                  | API-Usecase                                                      |
 | -------------------------------------- | ---------------------------------------------------------------- |
-| `baufinanzierung:vorgang:schreiben`    | Baufinanzierungsvorgänge anlegen                                 |
+| `baufinanzierung:vorgang:schreiben`    | Baufinanzierungsvorgänge ändern                                 |
 | `baufinanzierung:echtgeschaeft`        | Vorgänge in Produktion ändern, ansonsten nur Testmodus möglich   |
 
 ## Beispiel
