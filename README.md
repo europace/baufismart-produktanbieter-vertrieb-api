@@ -7,7 +7,7 @@ Europace-Plattform aktualisieren.
 ![Baufinanzierung](https://img.shields.io/badge/-Baufinanzierung-lightblue)
 
 [![Authentication](https://img.shields.io/badge/Auth-OAuth2-green)](https://docs.api.europace.de/baufinanzierung/authentifizierung/)
-[![GitHub release](https://img.shields.io/github/v/release/europace/baufismart-produktanbieter-vertrieb-api)](https://github.com/europace/baufismart-kundenangaben-api/releases)
+[![GitHub release](https://img.shields.io/github/v/release/europace/baufismart-produktanbieter-vertrieb-api)](https://github.com/europace/baufismart-produktanbieter-vertrieb-api/releases)
 
 [![Pattern](https://img.shields.io/badge/Pattern-Tolerant%20Reader-yellowgreen)](https://martinfowler.com/bliki/TolerantReader.html)
 
