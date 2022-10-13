@@ -8,7 +8,7 @@ info:
     name: Europace AG
     url: http://developer.europace.de
     email: devsupport@europace2.de
-  version: 1.1.2; 5ed069a8f4e6d299d36c7f4ee93c528ae2f7c07a
+  version: 1.1.3; afe20af6078639d29890f2f82b9f573d6758d550
 servers:
 - url: https://baufinanzierung.api.europace.de
   description: Produktionsserver
@@ -21,14 +21,14 @@ paths:
       tags:
       - Produktanbietervertrieb
       summary: Produktanbietervertriebsangaben an einem existierenden Vorgang aktualisieren
-      description: Produktanbietervertriebsangaben werden in BaufiSmart an einem existierenden
-        Vorgang aktualisiert. Der Scope `baufinanzierung:echtgeschaeft`wird benötigt,
-        wenn der Datenkontext `ECHT_GESCHAEFT` gewählt wird.
+      description: "Produktanbietervertriebsangaben werden in BaufiSmart an einem\
+        \ existierenden Vorgang aktualisiert. Der Scope `baufinanzierung:echtgeschaeft`wird\
+        \ benötigt, wenn der Datenkontext `ECHT_GESCHAEFT` gewählt wird."
       operationId: updateProduktanbieterVertriebsAngaben
       parameters:
       - name: vorgangsnummer
         in: path
-        description: Nummer des Vorgangs, dessen Daten aktualisiert werden
+        description: "Nummer des Vorgangs, dessen Daten aktualisiert werden"
         required: true
         style: simple
         explode: false
@@ -53,29 +53,29 @@ paths:
           type: string
       requestBody:
         content:
-          application/json; version=1.0:
+          application/json;version=1.0:
             schema:
               $ref: '#/components/schemas/UpdateRequest'
         required: true
       responses:
+        "404":
+          description: Der Vorgang existiert nicht
+        "403":
+          description: "Es fehlt die Berechtigung, um die Anfrage auszuführen"
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         "503":
           description: Der Service kann den Request momentan nicht verarbeiten
           content:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-        "403":
-          description: Es fehlt die Berechtigung, um die Anfrage auszuführen
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        "404":
-          description: Der Vorgang existiert nicht
-        "200":
-          description: Produktanbietervertriebsangaben in existierenden Vorgang importiert
         "401":
           description: Die Authentifizierung ist fehlgeschlagen
+        "200":
+          description: Produktanbietervertriebsangaben in existierenden Vorgang importiert
         "400":
           description: Der Request hat ein fehlerhaftes Format oder der Datentyp eines
             Felds weicht von der Spezifikation ab.
@@ -89,6 +89,15 @@ paths:
         - baufinanzierung:echtgeschaeft
 components:
   schemas:
+    AllgemeineVerbundweiterleitungAngaben:
+      type: object
+      properties:
+        reservierung:
+          $ref: '#/components/schemas/VerbundweiterleitungReservierung'
+        untervermittler:
+          $ref: '#/components/schemas/VerbundweiterleitungUntervermittler'
+      description: "Allgemeine Verbundweiterleitungs-Angaben zu einem Vorgang, die\
+        \ für alle Verbundpartner gelten"
     KonditionsAngaben:
       type: object
       properties:
@@ -148,6 +157,59 @@ components:
           $ref: '#/components/schemas/ScoringAngaben'
         kondition:
           $ref: '#/components/schemas/KonditionsAngaben'
+        verbundweiterleitung:
+          $ref: '#/components/schemas/VerbundweiterleitungAngaben'
+    VerbundweiterleitungAngaben:
+      type: object
+      properties:
+        allgemein:
+          $ref: '#/components/schemas/AllgemeineVerbundweiterleitungAngaben'
+      description: Produktanbietervertriebsspezifische Verbundweiterleitungs-Angaben
+        zu einem Vorgang
+    VerbundweiterleitungReservierung:
+      required:
+      - einstandsdatum
+      type: object
+      properties:
+        einstandsdatum:
+          type: string
+          description: Einstandsdatum und -zeit der reservierten Kondition im ISO-Date-Time-Format
+          format: date-time
+      description: Angaben zur Konditions-Reservierung der Verbundweiterleitung
+    VerbundweiterleitungUntervermittler:
+      required:
+      - partnerId
+      type: object
+      properties:
+        partnerId:
+          type: string
+        firmierung:
+          type: string
+        vorname:
+          type: string
+        nachname:
+          type: string
+        telefonnummer:
+          type: string
+        vertriebsOrganisation:
+          type: string
+        anschrift:
+          $ref: '#/components/schemas/VerbundweiterleitungUntervermittlerAnschrift'
+      description: "Daten des ursprünglichen Vermittlers, der in der Verbundweiterleitung\
+        \ als Untervermittler agiert."
+      example: ABC12
+    VerbundweiterleitungUntervermittlerAnschrift:
+      type: object
+      properties:
+        strasse:
+          type: string
+        hausnummer:
+          type: string
+        plz:
+          type: string
+        ort:
+          type: string
+      description: Anschrift eines Untervermittlers
     Problem:
       required:
       - status
@@ -157,7 +219,7 @@ components:
       properties:
         type:
           type: string
-          description: Eine absolute URI, die den Problemtyp eindeutig identifiziert.
+          description: "Eine absolute URI, die den Problemtyp eindeutig identifiziert."
           format: uri
           example: https://api.europace.de/produktanbieter-vertrieb/problem/constraint-violation
         title:
@@ -169,17 +231,17 @@ components:
           exclusiveMaximum: true
           minimum: 100
           type: number
-          description: Der HTTP Statuscode des Services, bei dem das Problem ursprünglich
-            aufgetreten ist.
+          description: "Der HTTP Statuscode des Services, bei dem das Problem ursprü\
+            nglich aufgetreten ist."
           example: 503
         detail:
           type: string
-          description: Ein menschenlesbarer Text, der das konkrete Problem beschreibt.
+          description: "Ein menschenlesbarer Text, der das konkrete Problem beschreibt."
           example: Die Anfrage kann aufgrund fehlender Informationen nicht verarbeitet
             werden.
         instance:
           type: string
-          description: 'Eine relative URI, die das Problem verursacht hat. '
+          description: "Eine relative URI, die das Problem verursacht hat. "
           format: uri
           example: /produktanbieter-vertrieb
     BadRequestProblem:
@@ -196,7 +258,7 @@ components:
       properties:
         field:
           type: string
-          description: Das Feld, welches einen ungültigen Wert beinhaltet
+          description: "Das Feld, welches einen ungültigen Wert beinhaltet"
         message:
           type: string
           description: Eine genauere Beschreibung des Fehlers
@@ -209,7 +271,7 @@ components:
           schema:
             $ref: '#/components/schemas/BadRequestProblem'
     Forbidden:
-      description: Es fehlt die Berechtigung, um die Anfrage auszuführen
+      description: "Es fehlt die Berechtigung, um die Anfrage auszuführen"
       content:
         application/problem+json:
           schema:
