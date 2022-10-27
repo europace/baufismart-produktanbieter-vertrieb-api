@@ -9,7 +9,7 @@
       "url" : "http://developer.europace.de",
       "email" : "devsupport@europace2.de"
     },
-    "version" : "1.1.3; afe20af6078639d29890f2f82b9f573d6758d550"
+    "version" : "1.1.4; 0d20e5be303fd008b8761055cbade115cb41dbe4"
   },
   "servers" : [ {
     "url" : "https://baufinanzierung.api.europace.de",
@@ -72,6 +72,9 @@
           "404" : {
             "description" : "Der Vorgang existiert nicht"
           },
+          "401" : {
+            "description" : "Die Authentifizierung ist fehlgeschlagen"
+          },
           "403" : {
             "description" : "Es fehlt die Berechtigung, um die Anfrage auszuführen",
             "content" : {
@@ -91,9 +94,6 @@
                 }
               }
             }
-          },
-          "401" : {
-            "description" : "Die Authentifizierung ist fehlgeschlagen"
           },
           "200" : {
             "description" : "Produktanbietervertriebsangaben in existierenden Vorgang importiert"
@@ -120,6 +120,9 @@
       "AllgemeineVerbundweiterleitungAngaben" : {
         "type" : "object",
         "properties" : {
+          "provision" : {
+            "$ref" : "#/components/schemas/VerbundweiterleitungProvision"
+          },
           "reservierung" : {
             "$ref" : "#/components/schemas/VerbundweiterleitungReservierung"
           },
@@ -196,6 +199,22 @@
           }
         },
         "description" : "Produktanbietervertriebsspezifische Verbundweiterleitungs-Angaben zu einem Vorgang"
+      },
+      "VerbundweiterleitungProvision" : {
+        "type" : "object",
+        "properties" : {
+          "kundenbetreuerProvision" : {
+            "type" : "number",
+            "description" : "Provisionsanteil in Euro des Kundenbetreuers des weitergeleiteten Antrags an der Vertriebsprovision des Verbunddarlehens",
+            "format" : "double"
+          },
+          "vertriebsProvisionGesamt" : {
+            "type" : "number",
+            "description" : "Gesamte Vertriebsprovision des Verbunddarlehens im weitergeleiteten Antrag",
+            "format" : "double"
+          }
+        },
+        "description" : "Angaben zur Provision aus dem weitergeleiteten Antrag"
       },
       "VerbundweiterleitungReservierung" : {
         "required" : [ "einstandsdatum" ],
