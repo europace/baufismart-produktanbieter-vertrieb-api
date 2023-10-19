@@ -9,7 +9,7 @@
       "url" : "http://developer.europace.de",
       "email" : "devsupport@europace2.de"
     },
-    "version" : "1.1.4; 0d20e5be303fd008b8761055cbade115cb41dbe4"
+    "version" : "1.1.5; 082f526249983852ca01f0f8ef963434db39e032"
   },
   "servers" : [ {
     "url" : "https://baufinanzierung.api.europace.de",
@@ -72,9 +72,6 @@
           "404" : {
             "description" : "Der Vorgang existiert nicht"
           },
-          "401" : {
-            "description" : "Die Authentifizierung ist fehlgeschlagen"
-          },
           "403" : {
             "description" : "Es fehlt die Berechtigung, um die Anfrage auszuführen",
             "content" : {
@@ -97,6 +94,9 @@
           },
           "200" : {
             "description" : "Produktanbietervertriebsangaben in existierenden Vorgang importiert"
+          },
+          "401" : {
+            "description" : "Die Authentifizierung ist fehlgeschlagen"
           },
           "400" : {
             "description" : "Der Request hat ein fehlerhaftes Format oder der Datentyp eines Felds weicht von der Spezifikation ab.",
@@ -238,6 +238,9 @@
           "firmierung" : {
             "type" : "string"
           },
+          "anrede" : {
+            "type" : "string"
+          },
           "vorname" : {
             "type" : "string"
           },
@@ -247,7 +250,22 @@
           "telefonnummer" : {
             "type" : "string"
           },
+          "email" : {
+            "type" : "string"
+          },
+          "registrierungsNummer" : {
+            "type" : "string"
+          },
+          "aufsichtsBehoerde" : {
+            "type" : "string"
+          },
           "vertriebsOrganisation" : {
+            "type" : "string"
+          },
+          "vertriebsOrganisationsId" : {
+            "type" : "string"
+          },
+          "externerKreditSachbearbeiterId" : {
             "type" : "string"
           },
           "anschrift" : {
