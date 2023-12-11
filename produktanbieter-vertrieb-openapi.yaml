@@ -8,7 +8,7 @@ info:
     name: Europace AG
     url: http://developer.europace.de
     email: devsupport@europace2.de
-  version: 1.1.5; 082f526249983852ca01f0f8ef963434db39e032
+  version: 1.1.6; 4a478e57af075743a37c2f227611841422da243f
 servers:
 - url: https://baufinanzierung.api.europace.de
   description: Produktionsserver
@@ -72,10 +72,10 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-        "200":
-          description: Produktanbietervertriebsangaben in existierenden Vorgang importiert
         "401":
           description: Die Authentifizierung ist fehlgeschlagen
+        "200":
+          description: Produktanbietervertriebsangaben in existierenden Vorgang importiert
         "400":
           description: Der Request hat ein fehlerhaftes Format oder der Datentyp eines
             Felds weicht von der Spezifikation ab.
@@ -92,6 +92,11 @@ components:
     AllgemeineVerbundweiterleitungAngaben:
       type: object
       properties:
+        ursprungsDarlehen:
+          type: array
+          description: Liste von Angaben zu den Ursprungsdarlehen
+          items:
+            $ref: '#/components/schemas/VerbundweiterleitungUrsprungsDarlehen'
         provision:
           $ref: '#/components/schemas/VerbundweiterleitungProvision'
         reservierung:
@@ -238,6 +243,13 @@ components:
         ort:
           type: string
       description: Anschrift eines Untervermittlers
+    VerbundweiterleitungUrsprungsDarlehen:
+      type: object
+      properties:
+        produktId:
+          type: string
+          description: Die Produkt-/ProduzentenId
+      description: Angaben zum Ursprungsdarlehen
     Problem:
       required:
       - status
