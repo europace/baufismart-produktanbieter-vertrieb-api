@@ -8,7 +8,7 @@ info:
     name: Europace AG
     url: http://developer.europace.de
     email: devsupport@europace2.de
-  version: 1.1.6; 4a478e57af075743a37c2f227611841422da243f
+  version: 1.1.7; 132109364df3a65bce03eb2b2357d079775cb2aa
 servers:
 - url: https://baufinanzierung.api.europace.de
   description: Produktionsserver
@@ -244,6 +244,8 @@ components:
           type: string
       description: Anschrift eines Untervermittlers
     VerbundweiterleitungUrsprungsDarlehen:
+      required:
+      - produktId
       type: object
       properties:
         produktId:
